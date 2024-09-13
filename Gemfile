@@ -7,11 +7,11 @@ gem "bootsnap", require: false
 gem "sprockets-rails"
 gem "puma", "~> 5.0"
 gem "jsbundling-rails"
-gem "turbo-rails"
 gem "stimulus-rails"
 gem "cssbundling-rails"
 gem "jbuilder"
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
+gem 'slim-rails'
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]

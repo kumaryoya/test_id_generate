@@ -1,0 +1,32 @@
+h1 = @post.title
+
+p
+  | 内容: 
+  = @post.content
+
+h2 コメント
+
+/ コメント一覧
+- if @post.comments.any?
+  - @post.comments.each do |comment|
+    .comment
+      p
+        | コメント内容: 
+        = comment.content
+      = link_to '削除', [@post, comment], method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger'
+      = link_to '削除', [@post, comment], method: :delete, data: { method: :delete, confirm: '本当に削除しますか？' }, class: 'btn btn-danger'
+      = link_to '削除', [@post, comment], data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-danger'
+      = link_to '削除', post_comment_path(@post, comment), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger'
+      = link_to '削除', post_comment_path(@post, comment), data: { turbo_method: :delete }, class: 'btn btn-danger'
+- else
+  p まだコメントはありません。
+
+h3 コメントを追加する
+
+= form_with(model: [@post, @post.comments.build], local: true) do |form|
+  .form-group
+    = form.label :content, 'コメント内容'
+    = form.text_area :content, rows: 3, class: 'form-control'
+
+  .form-group
+    = form.submit 'コメントを追加', class: 'btn btn-primary'
